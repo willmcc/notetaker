@@ -1,0 +1,33 @@
+
+<button ng-click="newNote()" class="btn btn-primary" style="float:right">+ New Note</button>
+
+<div class="alert alert-danger" role="alert" ng-if="error">
+	{{error}}
+</div>
+<div class="alert alert-success" role="success " ng-if="status">
+		{{status}}
+	</div>
+
+<div class="row">
+	<div ng-repeat = "note in notes" class="col-md-3 col-sm-6" style="margin: 4px; background-color:khaki;">
+		<div ng-show="editingID != note.note_id" style="height:400px">
+			<div style="float: right;"><button ng-click="editNote(note);" class="btn btn-warning">Edit</button></div>
+			<p><h4>{{note.title}}</h4></p>
+			<p><h6>Updated {{note.updated_at}}</h6></p>
+			<div style="overflow: auto; flex-grow : 1; height: 250px;">{{note.content}}</div>
+			<div style="clear: both"></div>
+		</div>
+		<div ng-show="editingID == note.note_id" style="height:400px">
+			<p>Title: <input type="text" ng-model="note.title" maxlength="255" style="width:100%"></p>
+			<p><textarea ng-model="note.content" style="width:100%; height: 250px;"></textarea></textarea></p>
+			<div style="margin-bottom: 10px">
+				<button ng-click="saveNote(note)" class="btn btn-warning">Save</button>
+				<button ng-click="cancelSave(note)" class="btn btn-warning">Cancel</button>
+				<button ng-show="note.note_id > 0" ng-click="deleteNote(note)" class="btn btn-danger">Delete</button>
+			</div>
+			<div style="clear: both"></div>
+		</div>
+		
+	</div>
+</div>
+<button ng-click="fetchMoreNotes()" class="btn btn-primary" >View More</button>
